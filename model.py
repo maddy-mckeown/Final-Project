@@ -26,48 +26,36 @@ class User(db.Model):
     user_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    email = db.Column(db.String, unique=True, )
+    email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     # TODO
     user_level = db.Column(db.Integer)
     user_tokens = db.Column(db.Integer)
 
+    scores = db.relationship('Score', back_populates='users')
+
+    # User.query.get(1).scores => return all score records for a given user
     # In the seed_database.py file, you can seed users the same way as the ratings lab
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
 
 
-# Requires thinking more
-class Game(db.Model):
-    
-    __tablename__ = "games"
-
-    game_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True, )
-    # letter_count = db.Column(db.Integer)
-    # word_name = db.Column(db.String)
-    # level_limit INTEGER,
-    num_guesses = db.Column(db.Integer) #5 guesses for 5 letter word 
-    max_score = db.Column(db.Integer)
-
-
 class Word(db.Model):
      
     __tablename__ = "words"
 
-    word_id = db.Column(db.Integer,
-                        autoincrement=True,
-                        primary_key=True, )
-    # word_name - do we need this and word_id?
+    word_id = db.Column(db.String(25),
+                        primary_key=True)
     letter_count = db.Column(db.Integer)
-    word_char = db.Column(db.String)
-    word_score = db.Column(db.Integer) # still thinking about this
+    word_score = db.Column(db.Integer)
+    # still thinking about this
 	# char_in = db.Column(Nullable=False) #revisit
 	# correct_idx = db.Column(Nullable=False) #revisit with ray
-	
+    scores = db.relationship('Score', back_populates="words")
     # possible_guesses
+    def __repr__(self):
+        return f'<Word word_id={self.word_id} letter_count={self.letter_count}>'
 
 
     # In the seed_database.py file, you will make a request to the random word generator api
@@ -84,6 +72,7 @@ class SingularTableItem #singular Score, singular User
 
     __tablename__ => plural lowercase table name
 '''
+
 class Score(db.Model): ## turn this into Scores? - seems like a down the road thing
     
     __tablename__ = "scores"
@@ -93,20 +82,28 @@ class Score(db.Model): ## turn this into Scores? - seems like a down the road th
                         primary_key=True, )
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     # dept_code = db.Column(db.String(5), db.ForeignKey('departments.dept_code'))#foreign key
-    word_id = db.Column(db.Integer, db.ForeignKey('words.word_id')) # foreign key
+    word_id = db.Column(db.String, db.ForeignKey('words.word_id')) # foreign key
     word_date = db.Column(db.Date)
     word_score = db.Column(db.Integer)
     num_guesses = db.Column(db.Integer)
-# can revisit word if they don't pass the level
-    '''
-    # SEMI RELEVANT TO YOUR CODE
+    # can revisit word if they don't pass the level
+
+    # db.relationship('NameOfClass', ) => method that navigates the foreign key relationship, goes to the other table, queries the other table at the same time
     users = db.relationship('User', back_populates="scores")
-    # you have a user logged into your app that's user #3
-    Score.query.filter_by(user_id=3).all() # all scores associated with that user
-    # db.relationship => set up users
-    # you want to query for all users who have received the word "bingo"
-    Score.query.filter_by(word_id='bingo').users => return all user records, otherwise it would be a join
+    # Score.users => all users
+    words = db.relationship('Word', back_populates="scores")
+    
+    def __repr__(self):
+        return f'<Score score_id={self.score_id} word_date={self.word_date}>'
     '''
+    # # SEMI RELEVANT TO YOUR CODE
+    # users = db.relationship('User', back_populates="scores")
+    # # you have a user logged into your app that's user #3
+    # Score.query.filter_by(user_id=3).all() # all scores associated with that user
+    # # db.relationship => set up users
+    # # you want to query for all users who have received the word "bingo"
+    # Score.query.filter_by(word_id='bingo').users => return all user records, otherwise it would be a join
+    # '''
 
 
 
@@ -129,11 +126,11 @@ class Score(db.Model): ## turn this into Scores? - seems like a down the road th
 
 
 
-def __repr__(self):
-        return f'<User user_id={self.user_id} game_id={self.game_id} gmplayed={self.gmplayed}
+# def __repr__(self):
+#         return f'<User user_id={self.user_id} game_id={self.game_id} gmplayed={self.gmplayed}
             
     
-def connect_to_db(flask_app, db_uri="postgresql:///your-database-name", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///Mordle", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -145,6 +142,9 @@ def connect_to_db(flask_app, db_uri="postgresql:///your-database-name", echo=Tru
 
 if __name__ == "__main__":
     from server import app
+    # per Flask docs, include the app's context (JUST a flask inconsistency)
+    # this line helps flask know its own identity
+    app.app_context().push()
     connect_to_db(app)
        
 
