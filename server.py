@@ -13,7 +13,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def home_page():
     if 'name' in session:
-        return redirect('/top-melons')
+        return redirect('/login')
     return render_template('homepage.html')
 
 # Model ~ View ~ Controller
@@ -46,7 +46,7 @@ def register_user():
         flash("Account created! Please log in.")
 
     return redirect("/login")
-    # return redirect("/login")
+
 
 @app.route("/login", methods=['GET'])
 def login_page():
@@ -67,6 +67,11 @@ def user_login_page():
         flash(f"Welcome back, {user.email}!")
 
     return redirect("/")
+
+@app.route("/game", methods=['POST'])
+def game_page():
+       return render_template("game.html")
+
     # return redirect ("/")
 
     # processing login (ratings lab has good examples)
