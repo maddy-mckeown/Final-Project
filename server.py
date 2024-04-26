@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db
+from model import connect_to_db, db, User
 # import crud
 # import seed_database as seed
 from seed_database import create_user
@@ -66,9 +66,9 @@ def user_login_page():
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
 
-    return redirect("/")
+    return redirect("/game")
 
-@app.route("/game", methods=['POST'])
+@app.route("/game")
 def game_page():
        return render_template("game.html")
 
