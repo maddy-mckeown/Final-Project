@@ -77,13 +77,20 @@ def user_login_page():
 
 @app.route("/game")
 def game_page():
-       return render_template("game.html")
-
-@app.route("/words.json")
-def word_page():
+    # query the database for all words
     words = Word.query.all()
-    words_list = WORDS
+    random_word = words.random.choice(words).word
+    ### something like => Word.query.all() => gives us a list of all word records from database
+    # use random.choice() to grab a random word
+    # pass that random word to the template (keyboard.html)
+    return render_template("keyboard.html", random_word=random_word)
+
+# @app.route("/words.json")
+# def word_page():
+#     words = Word.query.all()
+#     words_list = WORDS
    
+
 
     # return redirect ("/")
 

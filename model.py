@@ -49,9 +49,7 @@ class Word(db.Model):
                         primary_key=True)
     letter_count = db.Column(db.Integer)
     word_score = db.Column(db.Integer)
-    # still thinking about this
-	# char_in = db.Column(Nullable=False) #revisit
-	# correct_idx = db.Column(Nullable=False) #revisit with ray
+
     scores = db.relationship('Score', back_populates="words")
     # possible_guesses
     def __repr__(self):
