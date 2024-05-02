@@ -3,6 +3,8 @@ import json
 from random import choice, randint
 from datetime import datetime
 from model import db, User, connect_to_db
+from flask import Flask, request, render_template, jsonify
+
 
 
 
@@ -78,11 +80,11 @@ def get_users():
 
     # You don't need a crud file
     # user = crud.create_user(email, password)
-    model.db.session.add(user)
+    # model.db.session.add(user)
 
-    for _ in range(10):
-        word_id = choice(Word)
-        score = int(1, 5)  #level?
+    # for _ in range(10):
+    #     word_id = choice(Word)
+    #     score = int(1, 5)  #level?
 
 
     model.db.session.commit()

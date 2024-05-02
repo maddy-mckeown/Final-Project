@@ -4,6 +4,8 @@ from model import connect_to_db, db, User
 # import seed_database as seed
 from seed_database import create_user
 from jinja2 import StrictUndefined
+from flask import Flask, request, render_template, jsonify
+
 
 # creating instance of a flask app
 app = Flask(__name__)
@@ -47,6 +49,11 @@ def register_user():
 
     return redirect("/login")
 
+WORDS = []
+@app.route("/words")
+def get_random_word():
+    return random.choice(WORDS)
+
 
 @app.route("/login", methods=['GET'])
 def login_page():
@@ -71,6 +78,12 @@ def user_login_page():
 @app.route("/game")
 def game_page():
        return render_template("game.html")
+
+@app.route("/words.json")
+def word_page():
+    words = Word.query.all()
+    words_list = WORDS
+   
 
     # return redirect ("/")
 

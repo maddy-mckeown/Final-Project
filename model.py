@@ -66,11 +66,9 @@ class Word(db.Model):
     #   new_word = Word(word_name="brittle", letter_count=7)
     #   db.session.add(new_word)
     #   db.session.commit()
-'''
-Feel free to delete this, this is just comments for how class name should look
-class SingularTableItem #singular Score, singular User
 
-    __tablename__ => plural lowercase table name
+
+    # __tablename__ => plural lowercase table name
 '''
 
 class Score(db.Model): ## turn this into Scores? - seems like a down the road thing
