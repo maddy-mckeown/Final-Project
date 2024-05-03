@@ -93,15 +93,17 @@ def get_users():
 if __name__ == '__main__':
     from server import app
 
+
     app.app_context().push()
     model.connect_to_db(app)
 
     word_list_5 = get_word_list(5)
-    word_list_6 = get_word_list(6)
-    word_list_7 = get_word_list(7)
+    # word_list_6 = get_word_list(6)
+    # word_list_7 = get_word_list(7)
     print(get_word_list)
 
     for n in range(10):
         email = f'user{n}@test.com' 
         password = 'test'
         print(email, password)
+

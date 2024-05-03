@@ -32,7 +32,7 @@ class User(db.Model):
     user_level = db.Column(db.Integer)
     user_tokens = db.Column(db.Integer)
 
-    scores = db.relationship('Score', back_populates='users')
+    # scores = db.relationship('Score', back_populates='users')
 
     # User.query.get(1).scores => return all score records for a given user
     # In the seed_database.py file, you can seed users the same way as the ratings lab
@@ -50,7 +50,7 @@ class Word(db.Model):
     letter_count = db.Column(db.Integer)
     word_score = db.Column(db.Integer)
 
-    scores = db.relationship('Score', back_populates="words")
+    # scores = db.relationship('Score', back_populates="words")
     # possible_guesses
     def __repr__(self):
         return f'<Word word_id={self.word_id} letter_count={self.letter_count}>'
@@ -67,6 +67,7 @@ class Word(db.Model):
 
 
     # __tablename__ => plural lowercase table name
+
 '''
 
 class Score(db.Model): ## turn this into Scores? - seems like a down the road thing

@@ -35,8 +35,8 @@ document.addEventListener("keyup", (e) => {
     }
 })
 
-let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
-console.log(rightGuessString)
+// let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
+// console.log(rightGuessString)
 
 function initBoard() {
     let board = document.getElementById("key-board");
@@ -55,19 +55,49 @@ function initBoard() {
     }
 }
 function getWord() {
-    fetch("/words.json")
+    let rand_word = document.querySelector('#random-word').value 
+//     fetch("/words.json")
 
-  .then((response) => {
-    return response.json();
-  })
-  .then((responseData) => {
-    document.querySelector('#key-board').innerText = responseData;
-    console.log(responseData)
-  });
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((responseData) => {
+//     document.querySelector('#key-board').innerText = responseData;
+//     console.log(responseData)
+//   });
 
 }
+
 initBoard()
 
 function insertLetter() {
     //need to iterate over letters? loop? helppppp
 }
+
+
+// create a function to check guessed word
+    // check if the letter inputs match the random word
+    // grab onto the "letter-1", "letter-2" values
+    // check if each letter matches the letter in random word
+
+function checkWord(evt) {
+    evt.preventDefault();
+    // evt => form event, which includes the input values
+    // console.log(evt);
+    // console.log(evt.target[0].value);
+    let firstLetter = evt.target[0].value; //this is grabbing onto the data in the first input field
+    let secondLetter = evt.target[1].value; 
+    let thirdLetter = evt.target[2].value;
+    let fourthLetter = evt.target[3].value;
+    let fifthLetter = evt.target[4].value;
+    // "e", "a", "r", "t", "h"
+    // let letter1 = evt.
+    // 
+}
+
+// add event listeners to the forms
+let formGuess1 = document.querySelector('#guess-1');
+
+formGuess1.addEventListener('submit', checkWord);
+
+

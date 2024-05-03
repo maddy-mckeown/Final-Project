@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db, User
+from model import connect_to_db, db, User, Word
 # import crud
 # import seed_database as seed
 from seed_database import create_user
 from jinja2 import StrictUndefined
 from flask import Flask, request, render_template, jsonify
+import random
 
 
 # creating instance of a flask app
@@ -49,10 +50,7 @@ def register_user():
 
     return redirect("/login")
 
-WORDS = []
-@app.route("/words")
-def get_random_word():
-    return random.choice(WORDS)
+
 
 
 @app.route("/login", methods=['GET'])
@@ -79,7 +77,8 @@ def user_login_page():
 def game_page():
     # query the database for all words
     words = Word.query.all()
-    random_word = words.random.choice(words).word
+    # maybe query for five letter words
+    random_word = random.choice(words)
     ### something like => Word.query.all() => gives us a list of all word records from database
     # use random.choice() to grab a random word
     # pass that random word to the template (keyboard.html)
