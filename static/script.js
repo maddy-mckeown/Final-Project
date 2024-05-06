@@ -82,22 +82,47 @@ function insertLetter() {
 
 function checkWord(evt) {
     evt.preventDefault();
+    let random_word = document.querySelector('#random-word').value;
     // evt => form event, which includes the input values
     // console.log(evt);
     // console.log(evt.target[0].value);
+    // These are the user's guessed letters
     let firstLetter = evt.target[0].value; //this is grabbing onto the data in the first input field
     let secondLetter = evt.target[1].value; 
     let thirdLetter = evt.target[2].value;
     let fourthLetter = evt.target[3].value;
     let fifthLetter = evt.target[4].value;
-    // "e", "a", "r", "t", "h"
-    // let letter1 = evt.
-    // 
+    // "e", "a", "r", "t", "h" => this is the user's guess
+    // word is something like "musty"
+    // assume user's guess is correct,
+    // look at each letter and if it's not the same, then user's guess is incorrect
+    let userGuessCorrect = true;
+    if (random_word[0] != firstLetter) {
+        userGuessCorrect = false;
+    }
+    if (random_word[1] != secondLetter) {
+        userGuessCorrect = false;
+    }
+    if (random_word[2] != thirdLetter) {
+        userGuessCorrect = false;
+    }
+    if (random_word[3] != fourthLetter) {
+        userGuessCorrect = false;
+    }
+    if (random_word[4] != fifthLetter) {
+        userGuessCorrect = false;
+    }
+
+    // TODO - how to show users their guesses?
+    alert(userGuessCorrect);
 }
 
 // add event listeners to the forms
 let formGuess1 = document.querySelector('#guess-1');
-
 formGuess1.addEventListener('submit', checkWord);
+// TODO - this is where to addEventListeners
+let formGuess2 = document.querySelector('#guess-2');
+formGuess2.addEventListener('submit', checkWord);
+
 
 
