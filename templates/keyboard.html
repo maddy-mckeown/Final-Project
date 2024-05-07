@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mordle</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
     <link
     rel="stylesheet"
@@ -19,8 +19,8 @@
     <div>{{ random_word }}</div>
     <div id="game-board">
         <input id="random-word" type="hidden" value="{{ random_word.word_id }}">
-        <div id="gameboard">
-            <form id="guess-1">
+        <div id="game_guesses">
+            <form id="guess-1" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
                 <input name="letter-2" type="text" maxlength="1">
                 <input name="letter-3" type="text" maxlength="1">
@@ -28,7 +28,7 @@
                 <input name="letter-5" type="text" maxlength="1">
                 <button type="submit">Submit</button>
             </form>
-            <form id="guess-2">
+            <form id="guess-2" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
                 <input name="letter-2" type="text" maxlength="1">
                 <input name="letter-3" type="text" maxlength="1">
@@ -36,7 +36,7 @@
                 <input name="letter-5" type="text" maxlength="1">
                 <button type="submit">Submit</button>
             </form>
-            <form id="guess-3">
+            <form id="guess-3" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
                 <input name="letter-2" type="text" maxlength="1">
                 <input name="letter-3" type="text" maxlength="1">
@@ -44,7 +44,7 @@
                 <input name="letter-5" type="text" maxlength="1">
                 <button type="submit">Submit</button>
             </form>
-            <form id="guess-4">
+            <form id="guess-4" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
                 <input name="letter-2" type="text" maxlength="1">
                 <input name="letter-3" type="text" maxlength="1">
@@ -52,7 +52,7 @@
                 <input name="letter-5" type="text" maxlength="1">
                 <button type="submit">Submit</button>
             </form>
-            <form id="guess-5">
+            <form id="guess-5" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
                 <input name="letter-2" type="text" maxlength="1">
                 <input name="letter-3" type="text" maxlength="1">
@@ -64,7 +64,7 @@
         </div>
     <div id="key-board">
       <div id="keyboard-cont">
-        <div class="first-row">
+        <div class="first-row keyboard-row">
             <button class="keyboard-button">q</button>
             <button class="keyboard-button">w</button>
             <button class="keyboard-button">e</button>
@@ -76,7 +76,7 @@
             <button class="keyboard-button">o</button>
             <button class="keyboard-button">p</button>
         </div>
-        <div class="second-row">
+        <div class="second-row keyboard-row">
             <button class="keyboard-button">a</button>
             <button class="keyboard-button">s</button>
             <button class="keyboard-button">d</button>
@@ -87,8 +87,8 @@
             <button class="keyboard-button">k</button>
             <button class="keyboard-button">l</button>
         </div>
-        <div class="third-row">
-            <button class="keyboard-button">Del</button>
+        <div class="third-row keyboard-row">
+            <button class="keyboard-button" style="width: 50px">Del</button>
             <button class="keyboard-button">z</button>
             <button class="keyboard-button">x</button>
             <button class="keyboard-button">c</button>
@@ -96,7 +96,7 @@
             <button class="keyboard-button">b</button>
             <button class="keyboard-button">n</button>
             <button class="keyboard-button">m</button>
-            <button class="keyboard-button">Enter</button>
+            <button class="keyboard-button" style="width: 50px">Enter</button>
         </div>
     </div>
     </div>
