@@ -91,6 +91,7 @@ def game_page():
    
 
 
+
     # return redirect ("/")
 
     # processing login (ratings lab has good examples)
@@ -99,7 +100,6 @@ def game_page():
 
     # return render_template()
     
-
 
 
 
