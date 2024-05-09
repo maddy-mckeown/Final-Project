@@ -58,11 +58,11 @@
         box-sizing: border-box;
       }
       #key-board {
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
       }
 
       #game_guesses {
-        border: 1px solid green;
+        /* border: 1px solid green; */
       }
       
       .square {
@@ -179,9 +179,21 @@ form input[type="submit"] {
   border: 1px;
 
 }
+/* <form> */
 form input[type="submit"] {
+
   background-color: #007bff;
   color: white;
   cursor: pointer;
 }
 
+/* <span id="login-box"> <div> <form> <p> */
+.login-box {
+  margin: auto;
+  
+  margin-top: 15%;
+}
+
+body {
+  background-color: #000000; /* Black background color */
+}

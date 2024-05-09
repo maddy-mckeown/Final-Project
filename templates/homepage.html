@@ -1,48 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <style>
-  body {
-    background-image: url('')
-  }
-  </style>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordled</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-</head>
-  <h1>Welcome!</h1>
+<!-- <form action="/url-to-process-form-on-server" method="GET" > 
+  </form> -->
 
-  <h2>Create an Account</h2>
+{% extends 'base.html' %}
 
-  <form action="/url-to-process-form-on-server" method="GET" > # action means what url on the server the form submits to
+{% block body %}
 
 
 
-  </form>
 
 
-  <form action="/users" method="POST">
-    <p>
-      Email <input type="text" name="email">
-    </p>
+<!-- Centering! -->
+<div class="position-absolute top-50 start-50 translate-middle">
+  <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+   
 
-    <p>
-      Password <input type="password" name="password">
-    </p> 
-
-    <p>
-        <input type="submit">
-      </p>
-    </form>
     
-    <!-- <h2>Log In</h2>
-    <form action="/login" method="POST">
+    <h2>Create Account</h2>
+    <form action="/users" method="POST">
       <p>
         Email <input type="text" name="email">
       </p>
@@ -54,7 +28,16 @@
       <p>
         <input type="submit">
       </p>
-    </form>     -->
+    </form>    
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
 
 
 

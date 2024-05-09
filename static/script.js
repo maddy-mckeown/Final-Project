@@ -12,27 +12,29 @@ let nextLetter = 0;
 
 document.addEventListener("keyup", (e) => {
 
-    if (guessesRemaining === 0) {
-        return
-    }
+    // if (guessesRemaining === 0) {
+    //     return
+    // }
 
     let pressedKey = String(e.key)
-    if (pressedKey === "Backspace" && nextLetter !== 0) {
-        deleteLetter()
-        return
-    }
+    // if (pressedKey === "Backspace" && nextLetter !== 0) {
+    //     deleteLetter()
+    //     return
+    // }
 
     if (pressedKey === "Enter") {
-        checkGuess()
-        return
+        // TODO ?? - make it so that when user presses enter key, their guess is submitted
+        // checkGuess()
+        // checkWord??
+        // return
     }
 
-    let found = pressedKey.match(/[a-z]/gi)
-    if (!found || found.length > 1) {
-        return
-    } else {
-        insertLetter(pressedKey)
-    }
+    // let found = pressedKey.match(/[a-z]/gi)
+    // if (!found || found.length > 1) {
+    //     return
+    // } else {
+    //     insertLetter(pressedKey)
+    // }
 })
 
 // let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -54,8 +56,8 @@ function initBoard() {
         board.appendChild(row)
     }
 }
-function getWord() {
-    let rand_word = document.querySelector('#random-word').value 
+// function getWord() {
+    // let rand_word = document.querySelector('#random-word').value; 
 //     fetch("/words.json")
 
 //   .then((response) => {
@@ -65,8 +67,7 @@ function getWord() {
 //     document.querySelector('#key-board').innerText = responseData;
 //     console.log(responseData)
 //   });
-
-}
+// }
 
 initBoard()
 
@@ -94,27 +95,71 @@ function checkWord(evt) {
     let fifthLetter = evt.target[4].value;
     // "e", "a", "r", "t", "h" => this is the user's guess
     // word is something like "musty"
+    // word is "mouse"
     // assume user's guess is correct,
     // look at each letter and if it's not the same, then user's guess is incorrect
     let userGuessCorrect = true;
     if (random_word[0] != firstLetter) {
         userGuessCorrect = false;
-    }
-    if (random_word[1] != secondLetter) {
-        userGuessCorrect = false;
-    }
-    if (random_word[2] != thirdLetter) {
-        userGuessCorrect = false;
-    }
-    if (random_word[3] != fourthLetter) {
-        userGuessCorrect = false;
-    }
-    if (random_word[4] != fifthLetter) {
-        userGuessCorrect = false;
+        // if letter not in right position, then check if letter found in word at all?
+        if (random_word.includes(firstLetter)) {
+            // change color of evt.target[0] to grey/black
+            evt.target[0].style.backgroundColor = '#0a0a0a';
+        }
+    } else if (random_word[0] === firstLetter) {
+        evt.target[0].style.backgroundColor = 'pink';
     }
 
+
+    if (random_word[1] != secondLetter) {
+        userGuessCorrect = false;
+        if (random_word.includes(secondLetter)) {
+            // change color of evt.target[1] to grey/black
+            evt.target[1].style.backgroundColor = '#0a0a0a';
+        }
+    } else if (random_word[1] === secondLetter) {
+        evt.target[1].style.backgroundColor = 'pink';
+    }
+
+
+    if (random_word[2] != thirdLetter) {
+        userGuessCorrect = false;
+        if (random_word.includes(thirdLetter)) {
+            // change color of evt.target[2] to grey/black
+            evt.target[2].style.backgroundColor = '#0a0a0a';
+        }
+    } else if (random_word[2] === thirdLetter) {
+        evt.target[2].style.backgroundColor = 'pink';
+    }
+
+    if (random_word[3] != fourthLetter) {
+        userGuessCorrect = false;
+        if (random_word.includes(fourthLetter)) {
+            // change color of evt.target[3] to grey/black
+            evt.target[3].style.backgroundColor = '#0a0a0a';
+        }
+    } else if (random_word[3] === fourthLetter) {
+        evt.target[3].style.backgroundColor = 'pink';
+    }
+
+    if (random_word[4] != fifthLetter) {
+        userGuessCorrect = false;
+        if (random_word.includes(fifthLetter)) {
+            // change color of evt.target[4] to grey/black
+            evt.target[4].style.backgroundColor = '#0a0a0a';
+        }
+    } else if (random_word[4] === fifthLetter) {
+        evt.target[4].style.backgroundColor = 'pink';
+    }
+
+    // increment guess counter, move user to next form
     // TODO - how to show users their guesses?
-    alert(userGuessCorrect);
+
+    // when the user submits their guess, we want to indicate which letters are correct/not in the right spot
+    // when the letter is in the right spot, change the input backgroundColor to pink
+    // letter in the wrong spot turns backgroundColor black
+    // letter not in word does nothing
+    // alert(userGuessCorrect);
 }
 
 // add event listeners to the forms
@@ -124,5 +169,13 @@ formGuess1.addEventListener('submit', checkWord);
 let formGuess2 = document.querySelector('#guess-2');
 formGuess2.addEventListener('submit', checkWord);
 
+let formGuess3 = document.querySelector('#guess-3');
+formGuess3.addEventListener('submit', checkWord);
+
+let formGuess4 = document.querySelector('#guess-4');
+formGuess4.addEventListener('submit', checkWord);
+
+let formGuess5 = document.querySelector('#guess-5');
+formGuess5.addEventListener('submit', checkWord);
 
 

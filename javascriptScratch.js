@@ -17,10 +17,19 @@
 // - at the bottom of the js File, add event listeners to the other forms (guess-2, guess-3),
 //     - you can use the first one as a model
 
-// - figure out how you'd like to display correct guessed letters/incorrect guesses/indicators
 
 // - what happens when the user gets it right? do they get a new word?
 
 
 // 2.0
 // - instructions page
+//X finishing homepage to center, instructions - make it super perttytytyy
+// functionality for the keyboard - 
+// - figure out how you'd like to display correct guessed letters/incorrect guesses/indicators
+// hex values for colors
+// 
+
+
+// TOMORROW
+// - finishing the keyboard
+// - finishing the return key press for submission
