@@ -40,22 +40,22 @@ document.addEventListener("keyup", (e) => {
 // let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 // console.log(rightGuessString)
 
-function initBoard() {
-    let board = document.getElementById("key-board");
+// function initBoard() {
+//     let board = document.getElementById("key-board");
 
-    for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
-        let row = document.createElement("div")
-        row.className = "letter-row"
+//     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
+//         let row = document.createElement("div")
+//         row.className = "letter-row"
         
-        for (let j = 0; j < 5; j++) {
-            let box = document.createElement("div")
-            box.className = "letter-box"
-            row.appendChild(box)
-        }
+//         for (let j = 0; j < 5; j++) {
+//             let box = document.createElement("div")
+//             box.className = "letter-box"
+//             row.appendChild(box)
+//         }
 
-        board.appendChild(row)
-    }
-}
+//         board.appendChild(row)
+//     }
+// }
 // function getWord() {
     // let rand_word = document.querySelector('#random-word').value; 
 //     fetch("/words.json")
@@ -69,7 +69,7 @@ function initBoard() {
 //   });
 // }
 
-initBoard()
+// initBoard()
 
 function insertLetter() {
     //need to iterate over letters? loop? helppppp
@@ -83,10 +83,12 @@ function insertLetter() {
 
 function checkWord(evt) {
     evt.preventDefault();
+    console.log(evt.target.id); // in theory should have the id of the form
+    console.log(evt.submitter); // <button>? <form element>
     let random_word = document.querySelector('#random-word').value;
     // evt => form event, which includes the input values
     // console.log(evt);
-    // console.log(evt.target[0].value);
+    // console.log(random_word);
     // These are the user's guessed letters
     let firstLetter = evt.target[0].value; //this is grabbing onto the data in the first input field
     let secondLetter = evt.target[1].value; 
@@ -103,8 +105,12 @@ function checkWord(evt) {
         userGuessCorrect = false;
         // if letter not in right position, then check if letter found in word at all?
         if (random_word.includes(firstLetter)) {
-            // change color of evt.target[0] to grey/black
-            evt.target[0].style.backgroundColor = '#0a0a0a';
+            // change color of evt.target[0] to green
+            evt.target[0].style.backgroundColor = 'green';
+            // shouldn't be able to edit previous guess
+            // evt.target[0].disabled = true;
+        } else {
+            evt.target[0].style.backgroundColor = 'grey';
         }
     } else if (random_word[0] === firstLetter) {
         evt.target[0].style.backgroundColor = 'pink';
@@ -115,7 +121,10 @@ function checkWord(evt) {
         userGuessCorrect = false;
         if (random_word.includes(secondLetter)) {
             // change color of evt.target[1] to grey/black
-            evt.target[1].style.backgroundColor = '#0a0a0a';
+            evt.target[1].style.backgroundColor = 'green';
+            // evt.target[1].disabled = true;
+        } else {
+            evt.target[1].style.backgroundColor = 'grey';
         }
     } else if (random_word[1] === secondLetter) {
         evt.target[1].style.backgroundColor = 'pink';
@@ -126,7 +135,10 @@ function checkWord(evt) {
         userGuessCorrect = false;
         if (random_word.includes(thirdLetter)) {
             // change color of evt.target[2] to grey/black
-            evt.target[2].style.backgroundColor = '#0a0a0a';
+            evt.target[2].style.backgroundColor = 'green';
+            // evt.target[2].disabled = true;
+        } else {
+            evt.target[2].style.backgroundColor = 'grey';
         }
     } else if (random_word[2] === thirdLetter) {
         evt.target[2].style.backgroundColor = 'pink';
@@ -136,7 +148,10 @@ function checkWord(evt) {
         userGuessCorrect = false;
         if (random_word.includes(fourthLetter)) {
             // change color of evt.target[3] to grey/black
-            evt.target[3].style.backgroundColor = '#0a0a0a';
+            evt.target[3].style.backgroundColor = 'green';
+            // evt.target[3].disabled = true;
+        } else {
+            evt.target[3].style.backgroundColor = 'grey';
         }
     } else if (random_word[3] === fourthLetter) {
         evt.target[3].style.backgroundColor = 'pink';
@@ -146,10 +161,30 @@ function checkWord(evt) {
         userGuessCorrect = false;
         if (random_word.includes(fifthLetter)) {
             // change color of evt.target[4] to grey/black
-            evt.target[4].style.backgroundColor = '#0a0a0a';
+            evt.target[4].style.backgroundColor = 'green';
+            // evt.target[4].disabled = true;
+        } else {
+            evt.target[4].style.backgroundColor = 'grey';
         }
     } else if (random_word[4] === fifthLetter) {
         evt.target[4].style.backgroundColor = 'pink';
+    }
+
+    // all the inputs won't be editable
+    evt.target[0].disabled = true;
+    evt.target[1].disabled = true;
+    evt.target[2].disabled = true;
+    evt.target[3].disabled = true;
+    evt.target[4].disabled = true;
+    // hide this form's submit button
+    // submit button hiding
+    evt.submitter.style.display = 'none';
+    // show next form's submit button
+
+    // if user's guess is correct
+    if (userGuessCorrect) {
+        // then call function that will pop up message about user winning and end game
+        // maybe ask user if they want to play another round
     }
 
     // increment guess counter, move user to next form
@@ -178,4 +213,6 @@ formGuess4.addEventListener('submit', checkWord);
 let formGuess5 = document.querySelector('#guess-5');
 formGuess5.addEventListener('submit', checkWord);
 
-
+// a way for the user to type and then have it only read/submit that info
+// hiding and unhiding the submit buttons
+// if that works, then style the buttons so they're towards the bottom of the card

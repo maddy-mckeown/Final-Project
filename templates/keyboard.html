@@ -8,7 +8,7 @@
 
     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
       <div id="game-board">
-        <input id="random-word" type="hidden" value="{{ random_word.word_id }}">
+        <input id="random-word" value="{{ random_word.word_id }}">
         <div id="game_guesses">
             <form id="guess-1" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -16,7 +16,7 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Submit</button>
+                <button type="submit">1st Guess</button>
             </form>
             <form id="guess-2" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -24,7 +24,7 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Submit</button>
+                <button type="submit">2nd Guess</button>
             </form>
             <form id="guess-3" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -32,7 +32,7 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Submit</button>
+                <button type="submit">3rd Guess</button>
             </form>
             <form id="guess-4" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -40,7 +40,7 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Submit</button>
+                <button type="submit">4th Guess</button>
             </form>
             <form id="guess-5" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -48,25 +48,25 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Submit</button> 
+                <button type="submit">Last Chance!</button> 
             </form>
         </div>
       </div>
     </div>
 
-    <div id="key-board">
+    <!-- <div id="key-board">
       <div id="keyboard-cont">
         <div class="first-row keyboard-row">
-            <button class="keyboard-button">q</button>
-            <button class="keyboard-button">w</button>
-            <button class="keyboard-button">e</button>
-            <button class="keyboard-button">r</button>
-            <button class="keyboard-button">t</button>
-            <button class="keyboard-button">y</button>
-            <button class="keyboard-button">u</button>
-            <button class="keyboard-button">i</button>
-            <button class="keyboard-button">o</button>
-            <button class="keyboard-button">p</button>
+            <button class="keyboard-button" onclick="testFunction(evt)" value="q">q</button>
+            <button class="keyboard-button" value="w">w</button>
+            <button class="keyboard-button" value="e">e</button>
+            <button class="keyboard-button" value="r">r</button>
+            <button class="keyboard-button" value="t">t</button>
+            <button class="keyboard-button" value="y">y</button>
+            <button class="keyboard-button" value="u">u</button>
+            <button class="keyboard-button" value="i">i</button>
+            <button class="keyboard-button" value="o">o</button>
+            <button class="keyboard-button" value="p">p</button>
         </div>
         <div class="second-row keyboard-row">
             <button class="keyboard-button">a</button>
@@ -91,7 +91,7 @@
             <button class="keyboard-button" style="width: 50px">Enter</button>
         </div>
       </div>
-    </div>
+    </div> -->
 </div>
 <script
 src="https://code.jquery.com/jquery-3.6.0.min.js"

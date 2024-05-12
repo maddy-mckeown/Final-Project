@@ -85,6 +85,11 @@ def game_page():
     # pass that random word to the template (keyboard.html)
     return render_template("keyboard.html", random_word=random_word)
 
+
+@app.route("/profile")
+def user_profile():
+    return render_template("profile.html")
+
 # @app.route("/words.json")
 # def word_page():
 #     words = Word.query.all()
