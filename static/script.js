@@ -1,9 +1,11 @@
 // import { WORDS } from "./words.js";
 
-const NUMBER_OF_GUESSES = 6;
-let guessesRemaining = NUMBER_OF_GUESSES;
+const NUMBER_OF_GUESSES = 5;
+// let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
+
+let guessesRemaining = 5;
 
 // Get words by making fetch request to server => ajax call
 //fetch('/url-where-you-query-your-database-for-words').then()
@@ -70,6 +72,35 @@ document.addEventListener("keyup", (e) => {
 // }
 
 // initBoard()
+
+function winGame(is_win) {
+    const winInfo = {
+        is_win: is_win,
+        num_guesses: guessesRemaining,
+    };
+
+    fetch('/scores', {
+        method:'POST',
+        body: JSON.stringify(winInfo),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then((response)=> response.json())
+    .then((responseJson) => {
+        // start a new game => redirect the user to the game page again
+        console.log(responseJson.success);
+        // redirect them back to game page to play another round
+        window.location.href = "/game";
+    });
+}
+    // if is_win is true, the user won => do this
+        // make fetch request to the server, passing in num guesses and is_win
+        // make sure the database knows they go it right
+    // else if is_win is false the user lost => do something else
+    // either way we are giving them the option of a new game
+
+
 
 function insertLetter() {
     //need to iterate over letters? loop? helppppp
@@ -181,11 +212,25 @@ function checkWord(evt) {
     evt.submitter.style.display = 'none';
     // show next form's submit button
 
-    // if user's guess is correct
+   
     if (userGuessCorrect) {
+        alert("Congratulations! You have increased your score!");
+        winGame(true);
+    }
+    else {
+        guessesRemaining -= 1;
+        if (guessesRemaining <= 0) {
+            alert("Oh no! Would you like to play another round?");
+            winGame(false);
+        }
+    }
+
         // then call function that will pop up message about user winning and end game
         // maybe ask user if they want to play another round
-    }
+
+}
+
+
 
     // increment guess counter, move user to next form
     // TODO - how to show users their guesses?
@@ -195,7 +240,7 @@ function checkWord(evt) {
     // letter in the wrong spot turns backgroundColor black
     // letter not in word does nothing
     // alert(userGuessCorrect);
-}
+
 
 // add event listeners to the forms
 let formGuess1 = document.querySelector('#guess-1');

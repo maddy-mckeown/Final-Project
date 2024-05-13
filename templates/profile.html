@@ -1,0 +1,51 @@
+<!-- - If user guesses correct word within the 6 tries their user profile will update
+with a score, or a token. 
+- cute little graphic to show the tokens
+- could be a drop down on the game page or another page & nav bar? 
+- using score table  -->
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!-- The container to switch the background image -->
+<div class="container-fluid wordle-img">
+
+<!-- Centering! -->
+<div class="position-absolute top-50 start-50 translate-middle">
+    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+  
+  
+      
+      <h2>Your Scores</h2>
+      <table>
+        <tr>
+            <th>Date</th>
+            <!-- <th>NumGuess</th> -->
+            <th>Win</th>
+        </tr>
+
+      {% for score in current_user.scores %}
+
+      <tr>
+        <td>{{ score.word_date }}</td>
+        <!-- <td>{{ score.num_guesses }}</td> -->
+        <td>{{ score.is_win }}</td>
+      </tr>
+
+      {% endfor %}
+
+      </table>  
+     
+
+
+  
+
+  
+    </div>
+  </div> 
+  </div>
+
+
+
+{% endblock %}

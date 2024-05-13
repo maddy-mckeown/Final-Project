@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db, User, Word
+from model import connect_to_db, db, User, Word, Score
 # import crud
 # import seed_database as seed
 from seed_database import create_user
 from jinja2 import StrictUndefined
 from flask import Flask, request, render_template, jsonify
 import random
+import datetime
 
 
 # creating instance of a flask app
@@ -102,18 +103,28 @@ def user_profile():
     return render_template("profile.html", current_user=current_user)
 
 
-@app.route("/scores")
+@app.route("/scores", methods=['POST'])
 def user_score():
     # from the fetch, need to pass data: how many guesses? did they get it right?
 
     # this route will handle updating score when the user gets it right/runs out of guesses
     word_id = session['word_id']
+    word_date = datetime.datetime.now().date()
+    num_guesses = request.json.get("num-guesses") #integer
+    is_win = request.json.get("is_win") #true or false
     user_email = session['user_email']
 
     current_user = User.query.filter(User.email==user_email).first()
 
     # create a new Score() => word 
-    score = Score(word_id, current_user.user_id)
+    score = Score(user_id=current_user.user_id, word_id=word_id, word_date=word_date, num_guesses=num_guesses, is_win=is_win)
+    # return render_template("profile.html", user_score=user_score)
+    db.session.add(score)
+    db.session.commit()
+
+    return {
+        "success": True
+    }
 
 # @app.route("/words.json")
 # def word_page():
