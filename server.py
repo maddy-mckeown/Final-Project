@@ -19,14 +19,7 @@ def home_page():
         return redirect('/login')
     return render_template('homepage.html')
 
-# Model ~ View ~ Controller
-@app.route('/some-url', methods=['GET', 'POST']) # method that creates a route/URL/path; methods means what type of request
-def get_some_page_name(): # view function, view meaning it renders something to the browser
-    # return something a browser can understand
-    # browsers can understand text, html, json
-    # return render_template('some-html.html')
-    # return redirect('/some-other-url') # redirecting to another url (@app.route) that renders a template
-    return ''
+
 
 @app.route("/users", methods=["POST"])
 def register_user():
@@ -36,13 +29,20 @@ def register_user():
     email = request.form.get("email") # request.form['email']
     password = request.form.get("password")
 
+    # For login =>> 
+    # SELECT email FROM users WHERE email="test123@gmail.com";
+    existing_user = User.query.filter(User.email==email).first()
+     # querying users table for the user with that email
+
+    # check if user with that email already exists in the database
+        # if user doesn't exist, then create a user
     # user = seed.create_user(email, password)
-    user = create_user(email, password) # returns an instance of a User object
-    # For login =>> User.query.filter(email==email) # querying users table for the user with that email and password
-    if user:
+    # user = create_user(email, password) # returns an instance of a User object
+
+    if existing_user:
         flash("Cannot create an account with that email. Try again.")
     else:
-        # user = seed.create_user(email, password)
+        user = create_user(email, password)
         # adding user to database
         db.session.add(user)
         db.session.commit()
@@ -51,12 +51,11 @@ def register_user():
     return redirect("/login")
 
 
-
-
 @app.route("/login", methods=['GET'])
 def login_page():
     
     return render_template("login.html")
+
 
 @app.route("/user_login", methods=['POST'])
 def user_login_page():
@@ -67,12 +66,13 @@ def user_login_page():
  
     if not user or user.password != password:
         flash("The email or password you entered was incorrect.")
+        return redirect("/login")
     else:
         # Log in user by storing the user's email in session
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
+        return redirect("/game")
 
-    return redirect("/game")
 
 @app.route("/game")
 def game_page():
@@ -83,12 +83,37 @@ def game_page():
     ### something like => Word.query.all() => gives us a list of all word records from database
     # use random.choice() to grab a random word
     # pass that random word to the template (keyboard.html)
+
+    # when a new random word is grabbed from db, save to session
+    session["word_id"] = random_word.word_id
+
     return render_template("keyboard.html", random_word=random_word)
 
 
 @app.route("/profile")
 def user_profile():
-    return render_template("profile.html")
+
+    # querying the database for the user's scores
+    # returning to the template "games played" "games won"
+    email = session["user_email"]
+    current_user = User.query.filter(User.email==email).first()
+    # current_user.scores
+
+    return render_template("profile.html", current_user=current_user)
+
+
+@app.route("/scores")
+def user_score():
+    # from the fetch, need to pass data: how many guesses? did they get it right?
+
+    # this route will handle updating score when the user gets it right/runs out of guesses
+    word_id = session['word_id']
+    user_email = session['user_email']
+
+    current_user = User.query.filter(User.email==user_email).first()
+
+    # create a new Score() => word 
+    score = Score(word_id, current_user.user_id)
 
 # @app.route("/words.json")
 # def word_page():

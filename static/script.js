@@ -84,7 +84,7 @@ function insertLetter() {
 function checkWord(evt) {
     evt.preventDefault();
     console.log(evt.target.id); // in theory should have the id of the form
-    console.log(evt.submitter); // <button>? <form element>
+    // console.log(evt.submitter); // <button>? <form element>
     let random_word = document.querySelector('#random-word').value;
     // evt => form event, which includes the input values
     // console.log(evt);

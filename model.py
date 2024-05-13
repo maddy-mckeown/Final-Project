@@ -17,7 +17,6 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-
 class User(db.Model):
 
     __tablename__ = "users" # whatever tablename we include here becomes the tablename in postgres
@@ -28,11 +27,10 @@ class User(db.Model):
                         primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    # TODO
-    user_level = db.Column(db.Integer)
+    # user_level = db.Column(db.Integer)
     user_tokens = db.Column(db.Integer)
 
-    # scores = db.relationship('Score', back_populates='users')
+    scores = db.relationship('Score', back_populates='user')
 
     # User.query.get(1).scores => return all score records for a given user
     # In the seed_database.py file, you can seed users the same way as the ratings lab
@@ -50,7 +48,7 @@ class Word(db.Model):
     letter_count = db.Column(db.Integer)
     word_score = db.Column(db.Integer)
 
-    # scores = db.relationship('Score', back_populates="words")
+    scores = db.relationship('Score', back_populates="word")
     # possible_guesses
     def __repr__(self):
         return f'<Word word_id={self.word_id} letter_count={self.letter_count}>'
@@ -66,33 +64,30 @@ class Word(db.Model):
     #   db.session.commit()
 
 
-    # __tablename__ => plural lowercase table name
-
-'''
+    # __tablename__ => plural lowercase table na
 
 class Score(db.Model): ## turn this into Scores? - seems like a down the road thing
-    
+
     __tablename__ = "scores"
 
     score_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True, )
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    # dept_code = db.Column(db.String(5), db.ForeignKey('departments.dept_code'))#foreign key
     word_id = db.Column(db.String, db.ForeignKey('words.word_id')) # foreign key
     word_date = db.Column(db.Date)
-    word_score = db.Column(db.Integer)
     num_guesses = db.Column(db.Integer)
+    is_win = db.Column(db.Boolean)
     # can revisit word if they don't pass the level
 
-    # db.relationship('NameOfClass', ) => method that navigates the foreign key relationship, goes to the other table, queries the other table at the same time
-    users = db.relationship('User', back_populates="scores")
-    # Score.users => all users
-    words = db.relationship('Word', back_populates="scores")
+    # # db.relationship('NameOfClass', ) => method that navigates the foreign key relationship, goes to the other table, queries the other table at the same time
+    user = db.relationship('User', back_populates="scores")
+    # # Score.users => all users
+    word = db.relationship('Word', back_populates="scores")
     
     def __repr__(self):
         return f'<Score score_id={self.score_id} word_date={self.word_date}>'
-    '''
+
     # # SEMI RELEVANT TO YOUR CODE
     # users = db.relationship('User', back_populates="scores")
     # # you have a user logged into your app that's user #3
@@ -100,11 +95,7 @@ class Score(db.Model): ## turn this into Scores? - seems like a down the road th
     # # db.relationship => set up users
     # # you want to query for all users who have received the word "bingo"
     # Score.query.filter_by(word_id='bingo').users => return all user records, otherwise it would be a join
-    # '''
-
-
-
-
+    #
 
     
 # class Games_Played(db.Model):

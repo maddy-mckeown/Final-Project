@@ -59,13 +59,13 @@ def get_word_list(word_length):
 
 
 
-def create_user(email, password, user_tokens=0, user_level=1):
+def create_user(email, password, user_tokens=0):
     """Creates an instance of a User
     
     Note: Creates User object from model.py
     """
     # email and password come from server where we call the create_user() function
-    user = model.User(email=email, password=password, user_tokens=user_tokens, user_level=user_level)
+    user = model.User(email=email, password=password, user_tokens=user_tokens)
 
     return user
 
@@ -105,5 +105,7 @@ if __name__ == '__main__':
     for n in range(10):
         email = f'user{n}@test.com' 
         password = 'test'
-        print(email, password)
+        user = create_user(email, password)
+        db.session.add(user)
+    db.session.commit()
 
