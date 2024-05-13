@@ -1,13 +1,3 @@
-# Final-Project
+In the web app Wordled, users create a unique log in that will register them for a game-play account.  Users have five attempts to guess a secret five-letter word. After the user submits each guess, the individual boxes containing the letters of the word change to one of three colored tiles. These colors indicate if the guessed letter is in the word and in the correct spot, in the word but in the wrong spot, or not in the secret word at all. Player progress is recorded to a personal page on their account which allows users to see their score for games-won out of games-played. The best part is, there is no limit to how many games you can play!
 
-create classes for tables and columns
-CREATE database 
-HTML 
-   #create Login page (User)
-        # create tables for: 
-        User_ID
-        Email
-        Password
-        User Level
-        User Tokens 
-
+<img width="336" alt="worlde pic" src="https://github.com/maddy-mckeown/Final-Project/assets/161392372/5ebf6b18-7e39-4336-b08e-1f2a57358690">
