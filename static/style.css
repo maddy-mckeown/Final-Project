@@ -198,7 +198,10 @@
         align-items: center;
       }
       
-  
+  .nav-link {
+    border-right: 2px;
+    border-left: 2px;
+  }
       
       .keyboard-row, .guess-form {
         display: flex;

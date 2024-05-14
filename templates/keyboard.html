@@ -8,7 +8,7 @@
 
     <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
       <div id="game-board">
-        <input id="random-word" value="{{ random_word.word_id }}">
+        <input id="random-word" type="hidden" value="{{ random_word.word_id }}">
         <div id="game_guesses">
             <form id="guess-1" class="guess-form">
                 <input name="letter-1" type="text" maxlength="1">
@@ -48,7 +48,7 @@
                 <input name="letter-3" type="text" maxlength="1">
                 <input name="letter-4" type="text" maxlength="1">
                 <input name="letter-5" type="text" maxlength="1">
-                <button type="submit">Last Chance!</button> 
+                <button type="submit">Last</button> 
             </form>
         </div>
       </div>
